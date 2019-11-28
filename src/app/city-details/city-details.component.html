@@ -1,0 +1,23 @@
+      <div >
+        <h2  >{{currentCity.name}} </h2>
+        <p>{{currentCity.name}}</p>
+        <h4 >{{currentCity.country}}</h4>
+        <hr>
+        <div *ngFor="let nextDay of nextDays let i = index"
+        >
+        <div>
+        <strong>day {{i + 1}}</strong>  
+          <img src="http://openweathermap.org/img/wn/{{nextDay.weather[0].icon}}@2x.png"
+          alt="">
+          <h4>{{nextDay.dt_txt.slice(0,10)}}</h4>
+          <div >{{ (nextDay.main.temp - 273).toFixed(2)   }} °</div>
+          <div >{{nextDay.weather[0].main }} <span>{{nextDay.weather[0].description }}</span> </div>
+          <hr>
+          
+  
+        </div>
+      </div>
+
+  
+
+  <!--citiesdetails-->
