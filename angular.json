@@ -67,8 +67,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Angular-Wather-App:build"
-         
+            "browserTarget": "Angular-Wather-App:build",
+            "port": 9090
           },
           "configurations": {
             "production": {
