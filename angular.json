@@ -4,6 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "Angular-Wather-App": {
+    
       "projectType": "application",
       "schematics": {},
       "root": "",
