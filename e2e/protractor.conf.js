@@ -4,9 +4,6 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
-const port = process.env.PORT || 4200
-// const url = process.env.
-
 /**
  * @type { import("protractor").Config }
  */
@@ -19,7 +16,7 @@ exports.config = {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: `http://localhost:${port}/`,
+  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
