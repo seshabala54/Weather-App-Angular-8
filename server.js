@@ -11,7 +11,8 @@ app.get('/*', function(req, res) {
 });
 
 // default Heroku port
-app.listen(process.env.PORT || 5000);
+let port = process.env.PORT || 5000
+app.listen(port);
 
 // Heroku automagically gives us SSL
 // Lets write some middleware to redirect us
@@ -27,3 +28,5 @@ let forceSSL = (req, res, next) => {
 if (env === 'production') {
   app.use(forceSSL);
 }
+
+console.log(`server run on ` + port)
