@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot -prod",
-    "deploy": "git add . && git commit -m 'automatic commit' && git push origin master && git push heroku master"
+    "deploy": "git add . && git commit -m 'automaticcommit' && git push origin master && git push heroku master"
   },
   "private": true,
   "dependencies": {
