@@ -15,7 +15,7 @@ app.listen(process.env.PORT || 5000);
 
 // Heroku automagically gives us SSL
 // Lets write some middleware to redirect us
-let env = process.env.NODE_ENV || 'development';
+// let env = process.env.NODE_ENV || 'development';
 
 let forceSSL = (req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https') {
