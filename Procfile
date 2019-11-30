@@ -1,1 +1,1 @@
-web: ng serve -o
+web: node serevr
