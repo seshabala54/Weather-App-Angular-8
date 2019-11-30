@@ -2,12 +2,17 @@
   <div class="row justify-content-center">
     <div class="card mt-sm-3 col-md-8">
       <div class="card-body">
-        <h3 class="mb-0">Weather App</h3>
+        <h3 class="mb-0">Weather App </h3>
         <div class="form-group">
+          <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+          
           <div class="form-label" *ngIf="query"><strong>For:</strong>
             {{ query }}
-          </div>
-          <input class="form-control mt-2" type="text" [(ngModel)]="query">
+          </div> 
+                <div class="form-inline md-form mr-auto mb-4">
+                <input class="form-control mt-2" type="text"  (ngModelChange)="inputChanged($event)" [(ngModel)]="query" placeholder="search for cities">
+                <button (click)="queryAPI()" id="button12" mdbBtn size="sm" gradient="aqua" rounded="true" class="my-0 waves-light"  >Search</button>
+              </div>
         </div><!-- form-group -->
       </div><!-- card-body -->
     </div><!-- card -->

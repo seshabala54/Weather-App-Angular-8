@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Type } from '@angular/compiler';
+import { Observable, Subject } from 'rxjs';
+// import { fromEvent } from 'rxjs/add/observable';
+// import { debounceTime, map, switchMap, distinctUntilChanged, do as doo, from ,filter } from 'rxjs/add/operator';
+
+
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.css'],
   styles: [
     `
       .list-group-item:first-child {
@@ -20,11 +27,29 @@ export class AppComponent implements OnInit {
   cities: object;
   currentCity: any;
   nextDays: any;
-  data : any;
+  data: any;
+
 
 
   constructor(private http: HttpClient) {
     this.query = '';
+  }
+  searchSubject$ = new Subject<string>();
+  // results$: Observable<any>;
+
+  // ngOnInit() { 
+
+  // }
+
+  queryAPI() {
+    this.http.get<object>(`
+  https://api.openweathermap.org//data/2.5/forecast?q=${this.searchSubject$}&appid=4d725b2f41f2c98eca468ee939737fcb
+  `).subscribe(result => {
+      this.data = result
+    })
+    // let data = this.data
+    this.nextDays = this.data.list.filter(i => i.dt_txt.slice(11, 13) == "12");
+    this.currentCity = this.data.city
   }
 
   showCity(item) {
@@ -36,25 +61,31 @@ export class AppComponent implements OnInit {
       this.data = data
     })
     let data = this.data
-    console.log(data)
-    this.nextDays = this.data.list.filter(i =>  i.dt_txt.slice(11, 13) == "12" );
+    // console.log(data)
+    this.nextDays = this.data.list.filter(i => i.dt_txt.slice(11, 13) == "12");
     this.currentCity = this.data.city
-    console.log( this.currentCity, "gdfgd", this.nextDays)
-
-    // for ( let i of this.nextDays){
-    //   console.log(i)
-    // }
-    // this.query = item.name;
+    // console.log(this.currentCity, "gdfgd", this.nextDays)
     this.query = undefined;
     item.highlight = !item.highlight;
   }
 
 
   ngOnInit(): void {
+    // const data = from(fetch('../assets/data.json'));
+    // console.log(data)
     this.http.get<Object>('../assets/data.json').subscribe(data => {
-      console.log(data)
       this.cities = data;
     })
+    // this.results$ = this.searchSubject$
+      // .debounceTime(200)
+      // .distinctUntilChanged()
+      // .do(x => console.log('do', x))
+      // .switchMap(searchString => this.queryAPI(searchString))
+  }
+
+  inputChanged($event) {
+    console.log('input changed', $event);
+    this.searchSubject$ = $event;
   }
 
 }
