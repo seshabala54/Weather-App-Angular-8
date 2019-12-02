@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 // import { fromEvent } from 'rxjs/add/observable';
 // import { debounceTime, map, switchMap, distinctUntilChanged, do as doo, from ,filter } from 'rxjs/add/operator';
 
 
 
 
+@Injectable({
+  // we declare that this service should be created
+  // by the root application injector.
+  providedIn: 'root',
+})
 
 @Component({
   selector: 'app-root',
@@ -41,6 +47,18 @@ export class AppComponent implements OnInit {
 
   // }
 
+  clearSearch() {
+    this.currentCity = undefined
+    this.nextDays = undefined
+    this.data = undefined
+    console.log(this.currentCity, this.nextDays, this.data)
+  }
+
+  clearInput() {
+    this.query = ''
+
+  }
+
   queryAPI() {
     this.http.get<object>(`
   https://api.openweathermap.org//data/2.5/forecast?q=${this.searchSubject$}&appid=4d725b2f41f2c98eca468ee939737fcb
@@ -65,7 +83,7 @@ export class AppComponent implements OnInit {
     this.nextDays = this.data.list.filter(i => i.dt_txt.slice(11, 13) == "12");
     this.currentCity = this.data.city
     // console.log(this.currentCity, "gdfgd", this.nextDays)
-    this.query = undefined;
+    this.query = '';
     item.highlight = !item.highlight;
   }
 
@@ -77,10 +95,10 @@ export class AppComponent implements OnInit {
       this.cities = data;
     })
     // this.results$ = this.searchSubject$
-      // .debounceTime(200)
-      // .distinctUntilChanged()
-      // .do(x => console.log('do', x))
-      // .switchMap(searchString => this.queryAPI(searchString))
+    // .debounceTime(200)
+    // .distinctUntilChanged()
+    // .do(x => console.log('do', x))
+    // .switchMap(searchString => this.queryAPI(searchString))
   }
 
   inputChanged($event) {

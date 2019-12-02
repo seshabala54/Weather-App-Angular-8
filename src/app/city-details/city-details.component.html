@@ -1,4 +1,5 @@
-      <div >
+      <div *ngIf="currentCity">
+        <button (click)="clearSearch()">x </button>
         <h2  >{{currentCity.name}} </h2>
         <p>{{currentCity.name}}</p>
         <h4 >{{currentCity.country}}</h4>
